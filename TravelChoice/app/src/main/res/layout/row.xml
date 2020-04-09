@@ -17,6 +17,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:id="@+id/imageCV"
+            android:transitionName="image"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -24,7 +25,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textCV"
             android:text="Title"
-            android:textSize="22sp"
+            android:transitionName="name"
+            android:textSize="35sp"
             android:textColor="#000"
             android:textStyle="bold"
             android:layout_toEndOf="@+id/imageCV"

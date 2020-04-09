@@ -4,16 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CardViewActivity extends AppCompatActivity implements Serializable {
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
     ArrayList<City> finalCities = new ArrayList<>();
+    static HashMap<String, City> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +27,16 @@ public class CardViewActivity extends AppCompatActivity implements Serializable 
         Bundle b = getIntent().getExtras();
         finalCities = (ArrayList<City>) b.getSerializable("extra");
 
+        for (City each : finalCities){
+            hashMap.put(each.getName(), each);
+        }
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         myAdapter = new MyAdapter(this, getMyList());
         recyclerView.setAdapter(myAdapter);
+
     }
 
     private ArrayList<Model> getMyList() {
@@ -46,5 +55,9 @@ public class CardViewActivity extends AppCompatActivity implements Serializable 
         }
 
         return models;
+    }
+
+    static City getCity(String city){
+        return hashMap.get(city);
     }
 }
